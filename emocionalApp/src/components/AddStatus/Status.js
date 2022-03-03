@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
         width: 50,
     },
     image: {
-        height: 44,
-        width: 44
+        height: 36,
+        width: 36
     },
     text: {
         fontSize: 10,

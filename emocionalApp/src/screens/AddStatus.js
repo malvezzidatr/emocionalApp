@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, StatusBar, SafeAreaView } from 'react-native';
 import CloseButton from '../components/AddStatus/CloseButton';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Status from '../components/AddStatus/Status';
@@ -10,8 +10,15 @@ import nervous from '../assets/img/nervous.png';
 import confused from '../assets/img/confused.png';
 import sleeping from '../assets/img/sleeping.png';
 import Actions from '../components/AddStatus/Actions';
+import Message from '../components/AddStatus/Message';
+import SaveButton from '../components/AddStatus/SaveButton';
 
 const styles = StyleSheet.create({
+    globalContainer: {
+        backgroundColor: '#fff',
+        width: '100%',
+        height: '100%', 
+    },
     timeContainer: {
         marginTop: 8,
         alignItems: 'center',
@@ -32,24 +39,33 @@ const styles = StyleSheet.create({
     },
     statusContainer: {
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginLeft: 22,
+        marginBottom: 20
     },
     titleContainer: {
         alignItems: 'center',
-        marginTop: 55,
-        marginBottom: 60
+        marginBottom: 12
     },
     titleText: {
         fontSize: 30,
         color: '#000',
         fontWeight: 'bold',
+    },
+    messageContainer: {
+        marginTop: 20
+    },
+    saveButtonContainer: {
+        marginTop: 20
     }
 
 })
 
 const AddStatus = ({ navigation }) => {
+    const [message, setMessage] = useState();
+
     return (
-        <View>
+        <SafeAreaView style={styles.globalContainer}>
             <StatusBar hidden />
             <CloseButton onPress={() => navigation.navigate('Home')} />
             <View style={styles.titleContainer}>
@@ -91,7 +107,18 @@ const AddStatus = ({ navigation }) => {
 
             </View>
             <Actions />
-        </View>
+            <View style={styles.messageContainer}>
+                <Message 
+                    placeholder={'Escreva o que aconteceu hoje...'}
+                    field={message}
+                    setField={setMessage}
+                />
+            </View>
+            <View style={styles.saveButtonContainer}>
+                <SaveButton textButton={'Salvar'} />
+
+            </View>
+        </SafeAreaView>
     )
 }
 
