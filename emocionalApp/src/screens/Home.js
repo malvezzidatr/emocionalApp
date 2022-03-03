@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, FlatList, SafeAreaView, StatusBar, Text, Image } from 'react-native';
 import Card from '../components/Home/Card';
 import happy from '../assets/img/happy.png';
@@ -167,7 +167,7 @@ const MOCK = [
 
 
 export default function Home({ navigation }) {
-    
+
     return(
         <SafeAreaView 
             style={styles.globalContainer}

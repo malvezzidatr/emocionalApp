@@ -1,7 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import happy from '../assets/img/happy.png';
-
 import DetailsCard from '../components/Details/DetailsCard';
 import Message from '../components/Details/Message'
 import Icon from 'react-native-vector-icons/MaterialIcons';

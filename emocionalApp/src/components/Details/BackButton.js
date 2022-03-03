@@ -21,7 +21,7 @@ const BackButton = ({ onPress }) => {
     return (
         <TouchableOpacity
             style={styles.backButton}
-            onPress={onPress}    
+            onPress={onPress} 
         >
             <Text style={styles.backButtonText}>&lt;</Text>
         </TouchableOpacity>

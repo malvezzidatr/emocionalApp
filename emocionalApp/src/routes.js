@@ -8,6 +8,8 @@ import Icon from 'react-native-vector-icons/Feather';
 import Login from './screens/Login';
 import Home from './screens/Home';
 import Details from './screens/Details';
+import AddStatus from './screens/AddStatus';
+import Profile from './screens/Profile';
 
 const styles = StyleSheet.create({
     plusIcon: {
@@ -73,7 +75,7 @@ const MyTabs = () => {
             />
             <Tab.Screen
                 name='plus'
-                component={Login}
+                component={AddStatus}
                 options={() => ({
                     headerShown: false,
                     tabBarStyle: {display: 'none'},
@@ -87,7 +89,7 @@ const MyTabs = () => {
             <Tab.Screen 
                 options={{headerShown: false}}
                 name='Login'
-                component={Login}
+                component={Profile}
                 options={{
                     headerShown: false,
                     tabBarStyle: {display: 'none'},
