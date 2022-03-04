@@ -74,7 +74,7 @@ const MyTabs = () => {
                 }}       
             />
             <Tab.Screen
-                name='plus'
+                name='Add'
                 component={AddStatus}
                 options={() => ({
                     headerShown: false,
@@ -88,11 +88,10 @@ const MyTabs = () => {
             />
             <Tab.Screen 
                 options={{headerShown: false}}
-                name='Login'
+                name='Profile'
                 component={Profile}
                 options={{
                     headerShown: false,
-                    tabBarStyle: {display: 'none'},
                     tabBarIcon: () => (
                         <View style={styles.generalIcons} >
                             <Icon name='list' size={25} color={'#304FFE'} />
