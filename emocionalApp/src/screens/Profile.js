@@ -51,7 +51,7 @@ const Profile = ({ navigation }) => {
                     </View>
                     <View style={styles.buttonsContainer}>
                         <EditButton
-                            textButton={'editar perfil'}
+                            textButton={'editar perfil '}
                             onPress={() => setisEditing(!isEditing)}
                         />
                         <LogoutButton 
