@@ -10,6 +10,7 @@ import Home from './screens/Home';
 import Details from './screens/Details';
 import AddStatus from './screens/AddStatus';
 import Profile from './screens/Profile';
+import ChangeImage from './screens/ChangeImage';
 
 const styles = StyleSheet.create({
     plusIcon: {
@@ -38,6 +39,7 @@ const StackNavegation = () => {
                 <Stack.Screen options={{ headerShown: false }} name='Login' component={Login} />
                 <Stack.Screen options={{ headerShown: false }} name='Home' component={MyTabs} />
                 <Stack.Screen options={{ headerShown: false }} name='Details' component={Details} />
+                <Stack.Screen options={{ headerShown: false }} name='ChangeImage' component={ChangeImage} />
             </Stack.Navigator>
         </NavigationContainer>
     )

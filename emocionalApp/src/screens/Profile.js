@@ -64,7 +64,7 @@ const Profile = ({ navigation }) => {
             :
                 <View style={styles.container}>
                     <View style={styles.changeImageContainer}>
-                        <ChangeImageButton title={'Alterar foto'}/>
+                        <ChangeImageButton title={'Alterar foto'} onPress={() => navigation.navigate('ChangeImage')}/>
                     </View>
                     <View style={styles.inputsContainer}>
                         <Inputs label={'nome'} field={name} setField={setName}/>

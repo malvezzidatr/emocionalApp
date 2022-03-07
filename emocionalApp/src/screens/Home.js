@@ -168,6 +168,13 @@ const MOCK = [
 
 export default function Home({ navigation }) {
 
+    fetch("https://shrouded-shelf-01513.herokuapp.com/daily_entries?username=joaopedro", {
+        method: "GET",
+    })
+        .then(response => response.json())
+        .then(json => console.log(json))
+        .catch(error => console.error(error))
+
     return(
         <SafeAreaView 
             style={styles.globalContainer}

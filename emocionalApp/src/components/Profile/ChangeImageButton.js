@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
 	}
 })
 
-const ChangeImageButton = ({ title, navigate }) => {
+const ChangeImageButton = ({ title, onPress }) => {
     return (
         <TouchableOpacity 
             style={styles.button}
-            onPress={navigate}
+            onPress={onPress}
         >
             <Text style={styles.textButton}>{title}</Text>
         </TouchableOpacity>
