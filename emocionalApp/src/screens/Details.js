@@ -54,6 +54,13 @@ const styles = StyleSheet.create({
 })
 
 const Details = ({ route, navigation }) => {
+    const months = ['janeiro', 'fevereiro', 'março', 'abril', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    const data = new Date(route.params.data);
+    const createdHour = data.getHours();
+    const createdMinute = data.getMinutes();
+    const day = data.getDay();
+    const createdMonth = months[data.getMonth()]
+
     return (
         <View>
             <View style={styles.backButtonContainer}>
@@ -63,11 +70,11 @@ const Details = ({ route, navigation }) => {
                 <View style={styles.timeContainer}>
                     <View style={styles.iconContainer}>
                         <Icon name='schedule' size={14} color={'#969696'} />
-                        <Text style={styles.timeText}>{route.params.hour}</Text>
+                        <Text style={styles.timeText}>{createdHour}:{createdMinute}</Text>
                     </View>
                     <View style={styles.iconContainer}>
                         <Icon name='event' size={14} color={'#969696'} />
-                        <Text style={styles.timeText}>Hoje, 23 de janeiro</Text>
+                        <Text style={styles.timeText}>{day < 10 ? '0' + day : day } de {createdMonth}</Text>
                     </View>
                 </View>
                 <View style={styles.statusContainer}>

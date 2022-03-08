@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, FlatList, SafeAreaView, StatusBar, Text, Image } from 'react-native';
 import Card from '../components/Home/Card';
 import happy from '../assets/img/happy.png';
 import sad from '../assets/img/sad.png';
 import nervous from '../assets/img/nervous.png';
+import sleeping from '../assets/img/sleeping.png';
+import confused from '../assets/img/confused.png';
 import emptyHome from '../assets/img/emptyHome.png';
 
 
@@ -73,107 +75,42 @@ const styles = StyleSheet.create({
     }
 })
 
-const MOCK = [
-    {
-        "day": "21/07/22",
-        "status": "bem",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '9',
-        "hour": '8:45'
-    },
-    {
-        "day": "28/02/22",
-        "status": "mal",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '10',
-        "hour": '8:45'
-    },
-    {
-        "day": "21/10/22",
-        "status": "triste",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '1',
-        "hour": '8:45'
-    },
-    {
-        "day": "17/01/22",
-        "status": "bem",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '11',
-        "hour": '8:45'
-    },{
-        "day": "17/01/22",
-        "status": "bem",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '12',
-        "hour": '8:45'
-    },{
-        "day": "17/01/22",
-        "status": "bem",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '13',
-        "hour": '8:45'
-    },
-    {
-        "day": "22/10/22",
-        "status": "triste",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '2',
-        "hour": '8:45'
-    },
-    {
-        "day": "01/07/22",
-        "status": "triste",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '3',
-        "hour": '8:45'
-    },
-    {
-        "day": "30/12/22",
-        "status": "triste",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '4',
-        "hour": '8:45'
-    },
-    {
-        "day": "17/01/22",
-        "status": "bem",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '5',
-        "hour": '8:45'
-    },
-    {
-        "day": "21/07/22",
-        "status": "bem",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '6',
-        "hour": '8:45'
-    },
-    {
-        "day": "10/10/22",
-        "status": "mal",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '7',
-        "hour": '8:45'
-    },
-    {
-        "day": "28/02/22",
-        "status": "mal",
-        "message": "Lorem ipsum Dolor sit",
-        "id": '8',
-        "hour": '8:45'
+const checkStatus = (status) => {
+    if (status === 'happy') {
+        return happy;
     }
-]
 
+    if (status === 'sad') {
+        return sad;
+    }
+
+    if (status === 'sleeping') {
+        return sleeping;
+    }
+
+    if (status === 'confused') {
+        return confused;
+    }
+
+    if (status === 'nervous') {
+        return nervous;
+    }
+}
 
 export default function Home({ navigation }) {
+    const [status, setStatus] = useState()
+    const uri = 'https://shrouded-shelf-01513.herokuapp.com/daily_entries?username=caiomalvezzi';
+    useEffect(() => {
+        fetch(uri, {
+            method: "GET",
+        })
+            .then(response => response.json())
+            .then(json => {
+                setStatus(json);
+            })
+            .catch(error => console.error(error))
 
-    fetch("https://shrouded-shelf-01513.herokuapp.com/daily_entries?username=joaopedro", {
-        method: "GET",
-    })
-        .then(response => response.json())
-        .then(json => console.log(json))
-        .catch(error => console.error(error))
+    }, [])
 
     return(
         <SafeAreaView 
@@ -183,32 +120,33 @@ export default function Home({ navigation }) {
                 backgroundColor="#fff"
                 barStyle="dark-content"
             />
-            {MOCK.length > 0 
+            {status
                 ?  
                     <FlatList
-                        data={MOCK}
+                        data={status}
                         renderItem={({ item }) => (
                             <Card
                                 onPress={() => {
                                     navigation.navigate('Details', {
-                                        hour: item.hour,
-                                        image: item.status === 'bem' ? happy : item.status === 'triste' ? sad : nervous,
-                                        status: item.status,
-                                        message: item.message
+                                        data: item.created_at,
+                                        image: checkStatus(item.mood),
+                                        status: item.mood,
+                                        message: item.short_description
                                     })
                                     
                                 }}
-                                status= { item.status }
-                                day= { item.day }
-                                hour= { item.hour }
-                                message= { item.message }
-                                image= { item.status === 'bem' ? happy : item.status === 'triste' ? sad : nervous }
-                                id= { item.id }
+                                status = { item.mood }
+                                date = { item.created_at }
+                                message = { item.short_description }
+                                image = { checkStatus(item.mood) }
+                                id = { item.id }
+                                activities = {item.activities}
                             />
                         )}
                         keyExtractor={item => item.id}
                     />
                 :   <SafeAreaView style={styles.emptyHome}>
+                        
                         <Image
                             source={emptyHome}
                             style={styles.emptyImage}

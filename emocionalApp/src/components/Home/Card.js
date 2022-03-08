@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, Text, View, TouchableOpacity  } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icones from './Icones';
 
 const styles = StyleSheet.create({
     listContainer: {
@@ -38,14 +38,6 @@ const styles = StyleSheet.create({
     iconContainer: {
         flexDirection: 'row',
     },
-    icons: {
-        flexDirection: 'row',
-        marginRight: 8.5,
-    },
-    iconsText: {
-        fontWeight: 'bold',
-        marginLeft: 8.5,
-    },
     message: {
         marginTop: 122.5,
     },
@@ -82,7 +74,14 @@ const styles = StyleSheet.create({
     }
 })
 
-const Card = ({ status, day, hour, message, image, onPress }) => {
+const Card = ({ status, date, hour, message, image, onPress, activities }) => {
+    const months = ['janeiro', 'fevereiro', 'março', 'abril', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    const data = new Date(date);
+    const createdHour = data.getHours();
+    const createdMinute = data.getMinutes();
+    const day = data.getDay();
+    const createdMonth = months[data.getMonth()]
+
     return(
         <TouchableOpacity  
             style={styles.listContainer}
@@ -94,28 +93,17 @@ const Card = ({ status, day, hour, message, image, onPress }) => {
                     style={[styles.image, styles.marginLeft]}
                 />
                 <View>
-                    <Text style={styles.date}>hoje, 23 de janeiro</Text>
+                    <Text style={styles.date}> {day < 10 ? '0' + day : day } de {createdMonth}</Text>
                     <View style={styles.statusContainer}>
                         <Text style={[styles.statusText, status === 'bem' ? styles.textRed : status === 'triste' ? styles.textGreen : styles.textBlue ]}>{status}</Text>
-                        <Text style={styles.hour}>{hour}</Text>
+                        <Text style={styles.hour}>{createdHour}:{createdMinute}</Text>
                     </View>
                 </View>
             </View>
             <View style={[styles.iconContainer, styles.marginLeft]}>
-                <View style={styles.icons}>
-                    <Icon name="celebration" size={20} color={'#000'} />
-                    <Text style={styles.iconsText}>festa</Text>
-                    <Text style={styles.iconsText}> • </Text>
-                </View>
-                <View style={styles.icons}>
-                    <Icon name='pool' size={20} color={'#000'} />
-                    <Text style={styles.iconsText}>esporte</Text>
-                    <Text style={styles.iconsText}> • </Text>
-                </View>
-                <View style={styles.icons}>
-                    <Icon name='microwave' size={20} color={'#000'} />
-                    <Text style={styles.iconsText}>cozinhar</Text>
-                </View>
+                <Icones name={'celebration'} size={20} color={'#000'} />
+                <Icones name={'pool'} size={20} color={'#000'} />
+                <Icones name={'microwave'} size={20} color={'#000'} />
             </View>
             <Text style={[styles.message, styles.marginLeft]}>{message}</Text>
         </TouchableOpacity >
