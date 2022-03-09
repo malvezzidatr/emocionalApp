@@ -100,7 +100,7 @@ const checkStatus = (status) => {
 export default function Home({ navigation }) {
     const [status, setStatus] = useState()
     const uri = 'https://shrouded-shelf-01513.herokuapp.com/daily_entries?username=caiomalvezzi';
-    useEffect(() => {
+    const getStatus = () => {
         fetch(uri, {
             method: "GET",
         })
@@ -110,6 +110,9 @@ export default function Home({ navigation }) {
             })
             .catch(error => console.error(error))
 
+    }
+    useEffect(() => {
+        getStatus()
     }, [])
 
     return(
