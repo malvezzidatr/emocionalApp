@@ -9,9 +9,9 @@ import sad from '../assets/img/sad.png';
 import nervous from '../assets/img/nervous.png';
 import confused from '../assets/img/confused.png';
 import sleeping from '../assets/img/sleeping.png';
-import Actions from '../components/AddStatus/Actions';
 import Message from '../components/AddStatus/Message';
 import SaveButton from '../components/AddStatus/SaveButton';
+import ActionButton from '../components/AddStatus/ActionButton';
 
 const styles = StyleSheet.create({
     globalContainer: {
@@ -59,7 +59,27 @@ const styles = StyleSheet.create({
     saveButtonContainer: {
         marginTop: 20
     },
-    
+    globalContainer: {
+        alignItems: 'center'
+    },
+    container: {
+        width: 340,
+        height: 360,
+        borderColor: "#000",
+        borderWidth: 1,
+        borderRadius: 20,
+        
+    },
+    actionContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        marginTop: 30
+    },
+    closeButtonContainer: {
+        marginTop: 32,
+        marginRight: 300
+    }
 });
 
 
@@ -76,11 +96,33 @@ const AddStatus = ({ navigation }) => {
     const [statusSleeping, setStatusSleeping] = useState(false);
     const [statusBad, setStatusBad] = useState(false);
     const [index, setIndex] = useState();
+    const [hotel, setHotel] = useState(false);
+    const [favorite, setFavorite] = useState(false);
+    const [movie, setMovie] = useState(false);
+    const [storefront, setStorefront] = useState(false);
+    const [restaurant, setRestaurant] = useState(false);
+    const [celebration, setCelebration] = useState(false);
+    const [pool, setPool] = useState(false);
+    const [microwave, setMicrowave] = useState(false);
+    const [casino, setCasino] = useState(false);
+    const [actionsFiltered, setActionsFiltered] = useState([]);
     const today = new Date();
     const month = months[today.getMonth()];
     const day = today.getDate();
     const hour = today.getHours();
     const minutes = today.getMinutes();
+    const allActions = [pool, storefront, hotel, celebration, movie, restaurant, casino, favorite, microwave];
+
+    const actions = () => {
+        let actionsArray = allActions.map((action, index) => {
+            if (action) return index + 1;
+        })
+        
+        let actionsArrayFiltered = actionsArray.filter(i => {
+            return i;
+        })
+        setActionsFiltered(actionsArrayFiltered);
+    }
 
     const statusClicked = (status) => {
         const moods = ['bem', 'confuso', 'triste', 'sono', 'mal'];
@@ -110,7 +152,7 @@ const AddStatus = ({ navigation }) => {
         const body = {
             "daily_entry": {
                 "mood": mood,
-                "activity_ids": [1, 2],
+                "activity_ids": actionsFiltered,
                 'description': message,
                 'username': username
             }
@@ -122,12 +164,15 @@ const AddStatus = ({ navigation }) => {
             },
             body: JSON.stringify(body)
         });
+        setMessage('');
     }
 
     return (
         <SafeAreaView style={styles.globalContainer}>
             <StatusBar hidden />
-            <CloseButton onPress={() => navigation.navigate('Home')} />
+            <View style={styles.closeButtonContainer}>
+                <CloseButton onPress={() => navigation.navigate('Home')} />
+            </View>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Como você está?</Text>
                 
@@ -176,7 +221,113 @@ const AddStatus = ({ navigation }) => {
                 />
 
             </View>
-            <Actions />
+
+            <View style={styles.globalContainer}>
+                <View style={styles.container}>
+                    <View style={styles.actionContainer}>
+                        <ActionButton
+                            name={'hotel'}
+                            size={32}
+                            color={'#000'}
+                            text={'Descanso'}
+                            onPress={() => {
+                                setHotel(!hotel)
+                                actions()
+
+                            }}
+                            clicked={hotel}
+                        />
+                        <ActionButton
+                            name={'favorite'}
+                            size={32} color={'#000'}
+                            text={'Encontro'}
+                            onPress={() => {
+                                actions();
+                                setFavorite(!favorite);
+                            }}
+                            clicked={favorite}
+                        />
+                        <ActionButton
+                            name={'movie'}
+                            size={32}
+                            color={'#000'}
+                            text={'filmes e series'}
+                            onPress={() => {
+                                setMovie(!movie);
+                                actions();
+                            }}
+                            clicked={movie}
+                        />
+                        <ActionButton 
+                            name={'storefront'}
+                            size={32}
+                            color={'#000'}
+                            text={'compras'}
+                            onPress={() => {
+                                setStorefront(!storefront);
+                                actions();
+                            }}
+                            clicked={storefront}
+                        />
+                        <ActionButton
+                            name={'restaurant'}
+                            size={32}
+                            color={'#000'}
+                            text={'Boa Refeição'}
+                            onPress={() => {
+                                setRestaurant(!restaurant)
+                                actions();
+                            }}
+                            clicked={restaurant}
+                        />
+                        <ActionButton
+                            name={'celebration'}
+                            size={32}
+                            color={'#000'}
+                            text={'Festa'}
+                            onPress={() => {
+                                setCelebration(!celebration);
+                                actions();
+                            }}
+                            clicked={celebration}
+                        />
+                        <ActionButton
+                            name={'pool'}
+                            size={32}
+                            color={'#000'}
+                            text={'Esporte'}
+                            onPress={() => {
+                                setPool(!pool);
+                                actions();
+                            }}
+                            clicked={pool}
+                        />
+                        <ActionButton 
+                            name={'microwave'}
+                            size={32}
+                            color={'#000'}
+                            text={'Cozinhar'}
+                            onPress={() => {
+                                setMicrowave(!microwave);
+                                actions();
+                            }}
+                            clicked={microwave}
+                        />
+                        <ActionButton
+                            name={'casino'}
+                            size={32}
+                            color={'#000'}
+                            text={'Jogos'}
+                            onPress={() => {
+                                setCasino(!casino);
+                                actions();
+                            }}
+                            clicked={casino}
+                        />
+
+                    </View>
+                </View>
+            </View>
             <View style={styles.messageContainer}>
                 <Message 
                     placeholder={'Escreva o que aconteceu hoje...'}
