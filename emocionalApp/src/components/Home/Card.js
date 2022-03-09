@@ -33,7 +33,9 @@ const styles = StyleSheet.create({
     },
     image: {
         marginRight: 16,
-        marginBottom: 15
+        marginBottom: 15,
+        height: 60,
+        width: 60
     },
     iconContainer: {
         flexDirection: 'row',

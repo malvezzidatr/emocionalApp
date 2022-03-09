@@ -31,11 +31,16 @@ const styles = StyleSheet.create({
     },
     changeImageContainer: {
         marginTop: 18
+    },
+    image: {
+        width: 130,
+        height: 130
     }
 
 })
 
-const Profile = ({ navigation }) => {
+const Profile = ({ route, navigation }) => {
+    const params = route.params;
     const [isEditing, setisEditing] = useState(true);
     const [name, setName] = useState('Fulano');
     const [email, setEmail] = useState();
@@ -43,7 +48,7 @@ const Profile = ({ navigation }) => {
 
     return (
         <View style={styles.profileContainer}>
-            <Image source={imageProfile1} />
+            <Image style={styles.image} source={params ? params.image : imageProfile1} />
             {isEditing ? 
                 <View>
                     <View>
@@ -64,7 +69,7 @@ const Profile = ({ navigation }) => {
             :
                 <View style={styles.container}>
                     <View style={styles.changeImageContainer}>
-                        <ChangeImageButton title={'Alterar foto'} onPress={() => navigation.navigate('ChangeImage')}/>
+                        <ChangeImageButton title={'Alterar foto'} onPress={() => navigation.navigate('ChangeImage')} />
                     </View>
                     <View style={styles.inputsContainer}>
                         <Inputs label={'nome'} field={name} setField={setName}/>

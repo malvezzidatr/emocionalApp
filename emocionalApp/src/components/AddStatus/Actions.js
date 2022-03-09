@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import ActionButton from './ActionButton';
 
 
@@ -33,6 +33,18 @@ const Actions = () => {
     const [pool, setPool] = useState(false);
     const [microwave, setMicrowave] = useState(false);
     const [casino, setCasino] = useState(false);
+    const allActions = [hotel, favorite, movie, storefront, restaurant, celebration, pool, microwave, casino];
+    const [actionsFiltered, setActionsFiltered] = useState([])
+
+    const actions = () => {
+        let actionsArray = allActions.map((action, index) => {
+            if (action) return index;
+        })
+        let actionsArrayFiltered = actionsArray.filter(i => {
+            return i
+        })
+        setActionsFiltered(actionsArrayFiltered);
+    }
 
     return (
         <View style={styles.globalContainer}>
@@ -43,14 +55,20 @@ const Actions = () => {
                         size={32}
                         color={'#000'}
                         text={'Descanso'}
-                        onPress={() => setHotel(!hotel)}
+                        onPress={() => {
+                            setHotel(!hotel);
+                            actions();
+                        }}
                         clicked={hotel}
                     />
                     <ActionButton
                         name={'favorite'}
                         size={32} color={'#000'}
                         text={'Encontro'}
-                        onPress={() => setFavorite(!favorite)}
+                        onPress={() => {
+                            setFavorite(!favorite);
+                            actions();
+                        }}
                         clicked={favorite}
                     />
                     <ActionButton
@@ -58,7 +76,10 @@ const Actions = () => {
                         size={32}
                         color={'#000'}
                         text={'filmes e series'}
-                        onPress={() => setMovie(!movie)}
+                        onPress={() => {
+                            setMovie(!movie);
+                            actions();
+                        }}
                         clicked={movie}
                     />
                     <ActionButton 
@@ -66,7 +87,10 @@ const Actions = () => {
                         size={32}
                         color={'#000'}
                         text={'compras'}
-                        onPress={() => setstorefront(!storefront)}
+                        onPress={() => {
+                            setstorefront(!storefront);
+                            actions();
+                        }}
                         clicked={storefront}
                     />
                     <ActionButton
@@ -74,7 +98,10 @@ const Actions = () => {
                         size={32}
                         color={'#000'}
                         text={'Boa Refeição'}
-                        onPress={() => setRestaurant(!restaurant)}
+                        onPress={() => {
+                            setRestaurant(!restaurant)
+                            actions();
+                        }}
                         clicked={restaurant}
                     />
                     <ActionButton
@@ -82,7 +109,10 @@ const Actions = () => {
                         size={32}
                         color={'#000'}
                         text={'Festa'}
-                        onPress={() => setCelebration(!celebration)}
+                        onPress={() => {
+                            setCelebration(!celebration);
+                            actions();
+                        }}
                         clicked={celebration}
                     />
                     <ActionButton
@@ -90,7 +120,10 @@ const Actions = () => {
                         size={32}
                         color={'#000'}
                         text={'Esporte'}
-                        onPress={() => setPool(!pool)}
+                        onPress={() => {
+                            setPool(!pool);
+                            actions();
+                        }}
                         clicked={pool}
                     />
                     <ActionButton 
@@ -98,7 +131,10 @@ const Actions = () => {
                         size={32}
                         color={'#000'}
                         text={'Cozinhar'}
-                        onPress={() => setMicrowave(!microwave)} 
+                        onPress={() => {
+                            setMicrowave(!microwave);
+                            actions();
+                        }}
                         clicked={microwave}
                     />
                     <ActionButton
@@ -106,7 +142,10 @@ const Actions = () => {
                         size={32}
                         color={'#000'}
                         text={'Jogos'}
-                        onPress={() => setCasino(!casino)}
+                        onPress={() => {
+                            setCasino(!casino);
+                            actions();
+                        }}
                         clicked={casino}
                     />
 

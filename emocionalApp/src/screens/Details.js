@@ -70,7 +70,7 @@ const Details = ({ route, navigation }) => {
                 <View style={styles.timeContainer}>
                     <View style={styles.iconContainer}>
                         <Icon name='schedule' size={14} color={'#969696'} />
-                        <Text style={styles.timeText}>{createdHour < 10 ? '0' + createdHour : createdHour}:{createdHour}</Text>
+                        <Text style={styles.timeText}>{createdHour < 10 ? '0' + createdHour : createdHour}:{createdMinute < 10 ? '0' + createdMinute : createdMinute}</Text>
                     </View>
                     <View style={styles.iconContainer}>
                         <Icon name='event' size={14} color={'#969696'} />

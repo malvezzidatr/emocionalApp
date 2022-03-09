@@ -149,14 +149,12 @@ export default function Home({ navigation }) {
                         keyExtractor={item => item.id}
                     />
                 :   <SafeAreaView style={styles.emptyHome}>
-                        
                         <Image
                             source={emptyHome}
                             style={styles.emptyImage}
                         />
                         <Text style={styles.emptyText}>Você ainda não tem nenhum registro diário. Para Começar, toque no ícone de adicionar na tela</Text>
                     </SafeAreaView>
-                
             }
         </SafeAreaView>
     )

@@ -38,7 +38,6 @@ const ActionButton = ({ name, size, color, text, onPress, clicked }) => {
         <View style={styles.container}>
             <TouchableOpacity style={clicked ? styles.buttonPressed : styles.button} onPress={onPress}>
                 <Icon name={name} size={size} color={clicked ? '#fff' : color} />
-
             </TouchableOpacity>
             <Text style={styles.text}>{text}</Text>
         </View>

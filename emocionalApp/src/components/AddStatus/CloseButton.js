@@ -10,8 +10,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
-        marginTop: 32,
-        marginLeft: 28
     },
     CloseButtonText: {
         fontSize: 22,
