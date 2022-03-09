@@ -96,7 +96,7 @@ const Card = ({ status, date, hour, message, image, onPress, activities }) => {
                     <Text style={styles.date}> {day < 10 ? '0' + day : day } de {createdMonth}</Text>
                     <View style={styles.statusContainer}>
                         <Text style={[styles.statusText, status === 'bem' ? styles.textRed : status === 'triste' ? styles.textGreen : styles.textBlue ]}>{status}</Text>
-                        <Text style={styles.hour}>{createdHour}:{createdMinute}</Text>
+                        <Text style={styles.hour}>{createdHour}:{createdMinute < 10 ? '0' + createdMinute : createdMinute}</Text>
                     </View>
                 </View>
             </View>

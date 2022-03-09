@@ -21,14 +21,23 @@ const styles = StyleSheet.create({
         fontSize: 10,
         textTransform: 'lowercase',
         marginTop: 8
+    },
+    buttonPressed: {
+        width: 60,
+        height: 60,
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#304FFE',
+
     }
 });
 
-const ActionButton = ({ name, size, color, text}) => {
+const ActionButton = ({ name, size, color, text, onPress, clicked }) => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.button}>
-                <Icon name={name} size={size} color={color} />
+            <TouchableOpacity style={clicked ? styles.buttonPressed : styles.button} onPress={onPress}>
+                <Icon name={name} size={size} color={clicked ? '#fff' : color} />
 
             </TouchableOpacity>
             <Text style={styles.text}>{text}</Text>

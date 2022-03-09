@@ -21,10 +21,10 @@ const styles = StyleSheet.create({
     }
 });
 
-const SaveButton = ({ textButton }) => {
+const SaveButton = ({ textButton, onPress }) => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.saveButton}>
+            <TouchableOpacity style={styles.saveButton} onPress={onPress}>
                 <Text style={styles.text}>{textButton}</Text>
             </TouchableOpacity>
         </View>
